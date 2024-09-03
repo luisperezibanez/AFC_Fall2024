@@ -82,6 +82,7 @@ let {fName, lName, age, pets} = person;
 
 console.log(`${fName} ${lName} is ${age} years old.`)
 
+// Returning Arrays
 //let animals = ["Dog", "Cat", "Bird"]; --> from above
 let multiples = (animals) => {
     let newAnimals = [];
