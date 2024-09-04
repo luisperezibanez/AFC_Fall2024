@@ -80,7 +80,7 @@ let person = {
 
 let {fName, lName, age, pets} = person;
 
-console.log(`${fName} ${lName} is ${age} years old.`)
+console.log(`${fName} ${lName} is ${age} years old.`);
 
 // Returning Arrays
 //let animals = ["Dog", "Cat", "Bird"]; --> from above
