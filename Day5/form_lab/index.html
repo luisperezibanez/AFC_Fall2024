@@ -11,7 +11,74 @@
     <body>
         <script src="" async defer></script>
 
-
+        <form action="" method="get">
+            <label>First Name:
+                <input type="text" name="fname" id="name_input">
+            </label>
+            <br>
+            <br>
+            <label for="pass_input">Password:</label>
+            <input type="password" name="pw" id="pass_input">
+            <br>
+            <br>
+            <label for="email_input">email:</label>
+            <input type="email" name="emailAddress" id="email_input">
+            <br>
+            <br>
+            <label>
+                Are you Married?
+                <input type="radio" name="isMarried" id="isMarried" value="true">Yes
+                <input type="radio" name="isMarried" id="isMarried" value="false" checked>No
+                <input type="radio" name="isMarried" id="isMarried">It's Complicated
+            </label>
+            <br>
+            <br>
+            <label>
+                Are you Alive?
+                <input type="radio" name="isAlive" id="isAlive" value="true" checked>Yes
+                <input type="radio" name="isAlive" id="isAlive" value="false">No
+                <input type="radio" name="isAlive" id="isAlive">It's Complicated
+            </label>
+            <br>
+            <br>
+            <label>
+                Favorite Color:
+                <br>
+                <input type="checkbox" name="favoriteColor" id="favoriteColor" value="red">Red
+                <br>
+                <input type="checkbox" name="favoriteColor" id="favoriteColor" value="white">White
+                <br>
+                <input type="checkbox" name="favoriteColor" id="favoriteColor" value="blue">Blue
+            </label>
+            <br>
+            <br>
+            <label>
+                State:
+                <select name="state" id="state">
+                    <option value="" disabled selected>Select your state</option>
+                    <option value="al">Alabama</option>
+                    <option value="ak">Alaska</option>
+                    <option value="az">Arizona</option>
+                    <option value="ar">Arkansas</option>
+                    <option value="ca">California</option>
+                    <option value="co">Colorado</option>
+                    <option value="ct">Connecticut</option>
+                    <option value="de">Delaware</option>
+                    <option value="fl">Florida</option>
+                    <option value="ga">Georgia</option>
+                </select>
+            </label>
+            <br>
+            <br>
+            <Label>
+                Your Story:
+                <br>
+                <textarea name="story" id="story" cols="45" rows="20"></textarea>
+            </Label>
+            <br>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
 
     </body>
 </html>
