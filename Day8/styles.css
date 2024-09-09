@@ -1,0 +1,12 @@
+body {
+    background-color: rgb(255, 0, 0);
+}
+div {
+    border: blue solid 5px;
+}
+div p {
+    border-color: black;
+    border-style: solid;
+    border-width: 10px;
+    margin: 10px 20px 5px 15px;
+}
