@@ -1,12 +1,33 @@
 body {
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(222, 214, 214);
+
 }
 div {
     border: blue solid 5px;
+    margin: 0 auto;
 }
 div p {
     border-color: black;
     border-style: solid;
     border-width: 10px;
     margin: 10px 20px 5px 15px;
+    padding: 25px;
+}
+
+p {
+    display: inline-block;
+    font-family: "Mountains of Christmas", serif;
+}
+
+p:nth-child(1) {
+    text-align: center;
+    width: 50%;
+}
+
+#img_container {
+    width: 25%;
+    height: 200px;
+}
+img {
+    width: 100%;
 }
