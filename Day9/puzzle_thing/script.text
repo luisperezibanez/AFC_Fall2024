@@ -14,6 +14,11 @@ food.style.color = "blue";
 let sampleInput = document.getElementById("sampleInput");
 sampleInput.setAttribute("type", "password");
 
+
+
+
+
+
 function initializeGame(){
     const numberOfColumns = 4;
     const numberOfRows = 4;
