@@ -1,0 +1,38 @@
+body {
+    padding: 0px;
+}
+#gameContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-style: solid;
+    border-width: 10px;
+    border-color: black;
+}
+#puzzleContainer {
+    border-style: solid;
+    border-width: 2px;
+    border-color: red;
+    width: 600px;
+    height: 600px;
+    padding: 5px;
+    display:grid;
+    grid-template-columns: repeat(4, 25%);
+}
+.gameBtn {
+    align-content: center;
+    padding: 0px;
+    font-size: 18px;
+    font-family: Arial;
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: black;
+}
+.highlight {
+    color: red;
+}
+.letter {
+    
+}
