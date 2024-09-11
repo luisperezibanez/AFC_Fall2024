@@ -1,33 +1,48 @@
-const timerInterval = 500; // milliseconds
+const timerInterval = 10; // milliseconds
 let timerId = setInterval(engine, timerInterval);
 
 const typingTestParagraphs = [
-"The quick brown fox jumps over the lazy dog. This classic sentence contains every letter of the English alphabet and is often used to demonstrate typewriters and computer keyboards. It is a great way to assess typing speed and accuracy. By practicing with this sentence, you can improve your typing skills and become more proficient at handling various types of text. Remember to keep your fingers on the home row and maintain a steady rhythm as you type. Consistent practice can lead to significant improvements over time."
+"The quick brown fox jumps over the lazy dog. This classic sentence contains every letter of the English alphabet and is often used to demonstrate typewriters and computer keyboards. It is a great way to assess typing speed and accuracy. By practicing with this sentence, you can improve your typing skills and become more proficient at handling various types of text. Remember to keep your fingers on the home row and maintain a steady rhythm as you type. Consistent practice can lead to significant improvements over time.",
+"The gentle breeze rustles through the tall, verdant grass. This serene scene captures the essence of nature's tranquility and is often used to evoke a sense of peace and relaxation. Observing this natural beauty can be a wonderful way to relieve stress and connect with the environment. By immersing yourself in such moments, you can foster a deeper appreciation for the outdoors and enhance your overall well-being. Remember to take a deep breath and fully engage your senses as you enjoy the surroundings. Consistent moments of mindfulness in nature can lead to greater mental clarity and inner calm.",
+"Bright stars twinkle in the vast night sky. This captivating view highlights the beauty of the cosmos and is often used to inspire wonder and curiosity about the universe. Stargazing is a wonderful way to gain perspective on our place in the world and deepen your understanding of astronomy. By observing celestial events and constellations, you can expand your knowledge of the night sky and develop a greater appreciation for its mysteries. Remember to use a telescope for a closer look and keep a stargazing journal to track your discoveries. Regularly exploring the stars can lead to fascinating insights and a profound sense of connection to the universe.",
+"Golden leaves drift gently to the ground as autumn unfolds its vibrant colors. This picturesque scene embodies the essence of the changing seasons and is often used to evoke a sense of nostalgia and warmth. Observing the fall foliage can be a delightful way to appreciate the beauty of nature and reflect on the passage of time. By taking walks through wooded paths and enjoying the crisp air, you can deepen your connection to the natural world and enhance your sense of tranquility. Remember to dress warmly and bring a camera to capture the stunning landscapes. Regular outings during this season can lead to memorable experiences and a renewed appreciation for the cycle of nature."
 ];
 
+let selectedParagraph = 0;
+
 let PARAGRAPH_COUNTER = 0;
+let HELPER_COUNTER = 0;
+let VISIBLE_SPEED = 0; 
+let SELECTED_SPEED = 100; // How many times 'timeInterval' has to pass to sho a new game button. 100 = every second.
+
+let helperIsSelected = true;
+let helperHighlited = false;
+
+const numberOfColumns = 4;
+const numberOfRows = 4;
 
 function initializeGame(){
     stopGame();
 
     PARAGRAPH_COUNTER = 0;
+    HELPER_COUNTER = 0;
+    VISIBLE_SPEED = 10;
 
-    const numberOfColumns = 4;
-    const numberOfRows = 4;
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    selectedParagraph = getRandomIntegerInclusive(typingTestParagraphs.length - 1);
 
-    // Shuffle the array
-    const shuffledNumbers = shuffleArray(numbers);
+    helperIsSelected = true;
+    helperHighlited = false;
 
     let numberIndex = 0;
     for(let i = 0; i < numberOfColumns; i++){
         for(let j = 0; j < numberOfRows; j++){
             let btnId = "btn" + i + "-" + j;
             let tempBtn = document.getElementById(btnId);
-            tempBtn.textContent = shuffledNumbers[numberIndex];
-            tempBtn.setAttribute("value", shuffledNumbers[numberIndex]);
+
+            tempBtn.setAttribute("value", "");
             tempBtn.setAttribute("isVisible", "false");
             tempBtn.setAttribute("isBlocked", "false");
+            tempBtn.classList.remove("gameBtnHighlight");
             tempBtn.style.opacity = 0;
 
             numberIndex++;
@@ -46,55 +61,83 @@ function shuffleArray(array) {
 }
 
 function engine() {
-    // Usage
-    const randomColumn = getRandomInt(0, 3);
-    const randomRow = getRandomInt(0, 3);
+    VISIBLE_SPEED++;
+    if(VISIBLE_SPEED >= SELECTED_SPEED){
+        VISIBLE_SPEED = 0;
+        // Usage
+        const randomColumn = getRandomInt(0, 3);
+        const randomRow = getRandomInt(0, 3);
 
-    let btnId = "btn" + randomColumn + "-" + randomRow;
-    let tempBtn = document.getElementById(btnId);
+        let btnId = "btn" + randomColumn + "-" + randomRow;
+        let tempBtn = document.getElementById(btnId);
 
-    console.log(tempBtn.getAttribute("isVisible"));
+        console.log(tempBtn.getAttribute("isVisible"));
 
-    if(tempBtn.getAttribute("isVisible") == "true") {
-        let foundInvisible = false;
-        for(let i = 0; i < 4; i++){
-            for(let j = 0; j < 4; j++){
+        if(tempBtn.getAttribute("isVisible") == "true") {
+            let foundInvisible = false;
+            for(let i = 0; i < 4; i++){
+                for(let j = 0; j < 4; j++){
+                    btnId = "btn" + i + "-" + j;
+                    tempBtn = document.getElementById(btnId);
+
+                    if(tempBtn.getAttribute("isVisible") == "false") {
+                        foundInvisible = true;
+                        break
+                    }
+                }
+                if(foundInvisible)
+                    break;
+            }
+        }
+
+        if(tempBtn.getAttribute("isVisible") == "true"){
+            stopGame();
+            alert("You have lost. Press OK to restart");
+            initializeGame();
+        }
+        else{
+
+            tempBtn.innerHTML = ''; // Clear any existing content
+            let word = getWordAtIndex(typingTestParagraphs[selectedParagraph], PARAGRAPH_COUNTER)
+
+            // Create a span for each letter and add it to the container
+            word.split('').forEach(letter => {
+                const span = document.createElement('span');
+                span.textContent = letter;
+                span.classList.add('letter');
+                tempBtn.appendChild(span);
+            });
+
+            tempBtn.setAttribute("value", word);
+            tempBtn.setAttribute("isVisible", "true");
+            tempBtn.style.opacity = 1;
+
+            PARAGRAPH_COUNTER++;
+        }
+    }
+
+    if(helperIsSelected && !helperHighlited){
+        let btnId = "";
+        let tempBtn = null;
+        let foundHelper = false;
+        for(let i = 0; i < numberOfColumns; i++){
+            for(let j = 0; j < numberOfRows; j++){
                 btnId = "btn" + i + "-" + j;
                 tempBtn = document.getElementById(btnId);
 
-                if(tempBtn.getAttribute("isVisible") == "false") {
-                    foundInvisible = true;
-                    break
+                if(tempBtn.getAttribute("value") == typingTestParagraphs[selectedParagraph].split(" ")[HELPER_COUNTER]){
+                    foundHelper = true;
+                    helperHighlited = true;
+                    tempBtn.classList.add("gameBtnHighlight");
+                    HELPER_COUNTER++;
+                    break;
                 }
             }
-            if(foundInvisible)
+            if(foundHelper)
                 break;
         }
     }
 
-    if(tempBtn.getAttribute("isVisible") == "true"){
-        stopGame();
-        alert("You have lost. Press OK to restart");
-        initializeGame();
-    }
-    else{
-
-        tempBtn.innerHTML = ''; // Clear any existing content
-        let word = getWordAtIndex(typingTestParagraphs[0], PARAGRAPH_COUNTER)
-
-        // Create a span for each letter and add it to the container
-        word.split('').forEach(letter => {
-            const span = document.createElement('span');
-            span.textContent = letter;
-            span.classList.add('letter');
-            tempBtn.appendChild(span);
-        });
-
-        tempBtn.setAttribute("isVisible", "true");
-        tempBtn.style.opacity = 1;
-
-        PARAGRAPH_COUNTER++;
-}
 }
 
 function startGame(){
@@ -125,9 +168,6 @@ function handleKeyDown(event) {
 
     let btnId = "";
 
-    // Array to collect all letters in the letter container
-    //let allLetters = [];
-
     for(let i = 0; i < 4; i++){
         for(let j = 0; j < 4; j++){
             btnId = "btn" + i + "-" + j;
@@ -144,25 +184,31 @@ function handleKeyDown(event) {
                 else if (i > 0 && letters[i].textContent.toLowerCase() === letter && letters[i-1].classList.contains('highlight'))
                     letters[i].classList.add('highlight');
             }
-            
-            // letters.forEach(span => {
-            //     if (span.textContent.toLowerCase() === letter) {
-            //         span.classList.add('highlight');
-            //     }
-            // });
+
             const allHighlighted = Array.from(letters).every(span => span.classList.contains('highlight'));
             console.log(allHighlighted);
 
             if (allHighlighted) {
                 console.log('All letters have been highlighted.');
+
                 let tempBtn = document.getElementById(btnId);
                 tempBtn.innerHTML = ''; // Clear any existing content
-                tempBtn.setAttribute("isVisible", "false")
+                tempBtn.setAttribute("isVisible", "false");
+                tempBtn.setAttribute("value", "");
                 tempBtn.style.opacity = 0;
+                if(tempBtn.classList.contains("gameBtnHighlight")){
+                    tempBtn.classList.remove("gameBtnHighlight");
+                    helperHighlited = false;
+                }
+            
             }
         }
     }
 
+}
+
+function getRandomIntegerInclusive(max) {
+    return Math.floor(Math.random() * (max + 1));
 }
 
 // Add event listener for 'keydown' events on the document
