@@ -1,0 +1,123 @@
+/* <!-- 1. Apply a red background to all paragraphs --> */
+p {
+    background-color: red;
+}
+
+/* <!-- 2. Apply a blue text color to elements with the class `blue-text` --> */
+.blue-text {
+    color: blue;
+}
+
+/* <!-- 3. Apply a green border to the element with the id `unique-element` --> */
+#unique-element {
+    border-color: green;
+    border-style: solid;
+    border-width: 2px;
+}
+
+/* <!-- 4. Apply a font size of 20px to all <span> elements inside <div> --> */
+div > span {
+    font-size: 20px;
+}
+
+/* <!-- 5. Apply a yellow background to all input elements with type="text" --> */
+input[type="text"] {
+    background-color: yellow;
+}
+
+/* <!-- 6. Change the text color of all <h1> elements to purple --> */
+h1 {
+    color: purple;
+}
+
+/* <!-- 7. Change the background color of all <div> elements to light blue --> */
+div {
+    background-color: lightblue;
+}
+
+/* <!-- 8. Apply a background image to the body element --> */
+/* <!-- 9. Prevent the background image from repeating --> */
+body {
+    background-image: url("assets/image.jpg");
+    background-repeat: no-repeat;
+}
+
+/* <!-- 10. Set the opacity of all <div> elements to 0.5 --> */
+div {
+    opacity: 0.5;
+}
+
+/* <!-- 11. Change the font family of all <p> elements to Arial --> */
+p {
+    font-family: Arial;
+}
+
+/* <!-- 12. Change the font size of all <h2> elements to 24px --> */
+h2 {
+    font-size: 24px;
+}
+
+/* <!-- 13. Make the text of all <p> elements bold --> */
+p {
+    font-weight: bold;
+}
+
+/* <!-- 14. Center align all <h3> elements --> */
+h3 {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* <!-- 16. Add a 20px margin to all <div> elements --> */
+div {
+    margin: 20px;
+}
+
+/* <!-- 17. Add a 10px padding to all <div> elements --> */
+div {
+    padding: 10px;
+}
+
+/* <!-- 18. Add a solid, 2px black border to all <div> elements --> */
+div {
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}
+
+/* <!-- 19. Set the width of all <img> elements to 200px and height to 150px --> */
+img {
+    width: 200px;
+    height: 150px;
+}
+
+/* <!-- 20. Add a shadow to all <div> elements --> */
+div {
+    box-shadow: 3px 3px 5px black;
+}
+
+/* <!-- 21. Change the display property of all <span> elements to block --> */
+span {
+    display: block;
+}
+
+/* <!-- 22. Position a <div> element at the top-right corner of the page --> */
+div:nth-of-type(7) {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+/* <!-- 23. Float a <div> element to the left --> */
+div:nth-of-type(8) {
+    float: left;
+}
+
+/* <!-- 24. Use flexbox to center align items inside a container --> */
+.container {
+    display: flex;
+    align-items: center;
+}
