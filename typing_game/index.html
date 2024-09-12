@@ -3,13 +3,27 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Typing Game</title>
+        <title>Typing Game v0.1.6</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
         <script src="script.js" async defer></script>
     </head>
     <body>
+        <div id="menuContainer">
+            <label>Words per minute: 
+                <select name="speed" id="speedSelector" title="Select Words per Second">
+                    <option value="150">40</option>
+                    <option value="120">50</option>
+                    <option value="100">60</option>
+                    <option value="85">70</option>
+                    <option value="75">80</option>
+                    <option value="67">90</option>
+                    <option value="60">100</option>
+                </select>
+            </label>
+            <button onclick="initializeGame()">Begin</button>
+        </div>
         <div id="gameContainer">
             <div id="puzzleContainer">
                 <div id="btn0-0" class="gameBtn" isVisible="false" isBlocked="false"></div>
@@ -30,6 +44,5 @@
                 <div id="btn3-3" class="gameBtn" isVisible="false" isBlocked="false"></div>
             </div>
         </div>
-        <!-- <script src="script.js" async defer></script> -->
     </body>
 </html>

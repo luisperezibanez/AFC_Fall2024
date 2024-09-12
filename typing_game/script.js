@@ -9,17 +9,19 @@ const typingTestParagraphs = [
 ];
 
 let selectedParagraph = 0;
+let WORDS = [];
 
 let PARAGRAPH_COUNTER = 0;
 let HELPER_COUNTER = 0;
 let VISIBLE_SPEED = 0; 
-let SELECTED_SPEED = 100; // How many times 'timeInterval' has to pass to sho a new game button. 100 = every second.
+let SELECTED_SPEED = 150; // How many times 'timeInterval' has to pass to sho a new game button. 100 = every second.
 
 let helperIsSelected = true;
 let helperHighlited = false;
 
 const numberOfColumns = 4;
 const numberOfRows = 4;
+let visibleCount = 0;
 
 function initializeGame(){
     stopGame();
@@ -28,10 +30,14 @@ function initializeGame(){
     HELPER_COUNTER = 0;
     VISIBLE_SPEED = 10;
 
-    selectedParagraph = getRandomIntegerInclusive(typingTestParagraphs.length - 1);
+    selectedParagraph = 3//getRandomIntegerInclusive(typingTestParagraphs.length - 1);
+
+    WORDS = typingTestParagraphs[selectedParagraph].split(" ");
 
     helperIsSelected = true;
     helperHighlited = false;
+
+    visibleCount = 0;
 
     let numberIndex = 0;
     for(let i = 0; i < numberOfColumns; i++){
@@ -112,30 +118,38 @@ function engine() {
             tempBtn.setAttribute("isVisible", "true");
             tempBtn.style.opacity = 1;
 
+            visibleCount++;
+
             PARAGRAPH_COUNTER++;
         }
+
     }
 
     if(helperIsSelected && !helperHighlited){
         let btnId = "";
         let tempBtn = null;
         let foundHelper = false;
-        for(let i = 0; i < numberOfColumns; i++){
-            for(let j = 0; j < numberOfRows; j++){
-                btnId = "btn" + i + "-" + j;
-                tempBtn = document.getElementById(btnId);
+        
+        //while(!foundHelper){
+            for(let i = 0; i < numberOfColumns; i++){
+                for(let j = 0; j < numberOfRows; j++){
+                    btnId = "btn" + i + "-" + j;
+                    tempBtn = document.getElementById(btnId);
 
-                if(tempBtn.getAttribute("value") == typingTestParagraphs[selectedParagraph].split(" ")[HELPER_COUNTER]){
-                    foundHelper = true;
-                    helperHighlited = true;
-                    tempBtn.classList.add("gameBtnHighlight");
-                    HELPER_COUNTER++;
-                    break;
+                    if(tempBtn.getAttribute("value").toLowerCase() == WORDS[HELPER_COUNTER].toLowerCase()){
+                        foundHelper = true;
+                        helperHighlited = true;
+                        tempBtn.classList.add("gameBtnHighlight");
+                        HELPER_COUNTER++;
+                        break;
+                    }
                 }
+                if(foundHelper)
+                    break;
             }
-            if(foundHelper)
-                break;
-        }
+            if( visibleCount > 0 && !foundHelper)
+                HELPER_COUNTER++;
+       // }
     }
 
 }
@@ -159,7 +173,7 @@ function getWordAtIndex(paragraph, index) {
     const words = paragraph.split(/\s+/).filter(word => word.length > 0);
 
     // Access the word at the specified index
-    return words[index] || 'Index out of range'; // Handle cases where index is out of bounds
+    return WORDS[index] || 'Index out of range'; // Handle cases where index is out of bounds
 }
 
 function handleKeyDown(event) {
@@ -188,7 +202,7 @@ function handleKeyDown(event) {
             const allHighlighted = Array.from(letters).every(span => span.classList.contains('highlight'));
             console.log(allHighlighted);
 
-            if (allHighlighted) {
+            if (letters.length > 0 && allHighlighted) {
                 console.log('All letters have been highlighted.');
 
                 let tempBtn = document.getElementById(btnId);
@@ -196,6 +210,7 @@ function handleKeyDown(event) {
                 tempBtn.setAttribute("isVisible", "false");
                 tempBtn.setAttribute("value", "");
                 tempBtn.style.opacity = 0;
+                visibleCount--;
                 if(tempBtn.classList.contains("gameBtnHighlight")){
                     tempBtn.classList.remove("gameBtnHighlight");
                     helperHighlited = false;
@@ -214,4 +229,5 @@ function getRandomIntegerInclusive(max) {
 // Add event listener for 'keydown' events on the document
 document.addEventListener('keydown', handleKeyDown);
 
-initializeGame();
+stopGame();
+//initializeGame();
