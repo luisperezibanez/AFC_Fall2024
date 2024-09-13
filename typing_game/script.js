@@ -15,7 +15,7 @@ let WORDS = typingTestParagraphs[selectedParagraph].split(" ");
 let PARAGRAPH_COUNTER = 0;
 let HELPER_COUNTER = 0;
 let VISIBLE_SPEED = 0; 
-let SELECTED_SPEED = 100; // How many times 'timeInterval' has to pass to sho a new game button. 100 = every second.
+let SELECTED_SPEED = 100; // How many times 'timeInterval' has to pass to show a new game button. 100 = every second.
 
 let helperIsSelected = true;
 let helperHighlited = false;
@@ -33,17 +33,18 @@ function setup() {
 
             let word = getWordAtIndex(typingTestParagraphs[selectedParagraph], setupCounter++)
 
-            // Create a span for each letter and add it to the container
-            word.split('').forEach(letter => {
-                const span = document.createElement('span');
-                span.textContent = letter;
-                span.classList.add('letter');
-                tempBtn.appendChild(span);
-            });
+            if(word){
+                // Create a span for each letter and add it to the container
+                word.split('').forEach(letter => {
+                    const span = document.createElement('span');
+                    span.textContent = letter;
+                    span.classList.add('letter');
+                    tempBtn.appendChild(span);
+                });
 
 
-            tempBtn.setAttribute("value", word);
-            
+                tempBtn.setAttribute("value", word);
+            }
         }
     }
 }
@@ -85,8 +86,10 @@ function initializeGame(){
 
 function engine() {
     VISIBLE_SPEED++;
+    let foundInvisible = false;
     if(VISIBLE_SPEED >= SELECTED_SPEED){
         VISIBLE_SPEED = 0;
+        //visibleCount = 0;
         // Usage
         const randomColumn = getRandomInt(0, 3);
         const randomRow = getRandomInt(0, 3);
@@ -94,26 +97,27 @@ function engine() {
         let btnId = "btn" + randomColumn + "-" + randomRow;
         let tempBtn = document.getElementById(btnId);
 
-        console.log(tempBtn.getAttribute("isVisible"));
-
         if(tempBtn.getAttribute("isVisible") == "true") {
-            let foundInvisible = false;
             for(let i = 0; i < 4; i++){
                 for(let j = 0; j < 4; j++){
                     btnId = "btn" + i + "-" + j;
                     tempBtn = document.getElementById(btnId);
 
-                    if(tempBtn.getAttribute("isVisible") == "false") {
+                    if(tempBtn.getAttribute("isVisible") == "false" && PARAGRAPH_COUNTER < WORDS.length) {
                         foundInvisible = true;
-                        break
+                        break;
                     }
+                    //else
+                        //visibleCount++;
                 }
                 if(foundInvisible)
                     break;
             }
         }
+        else
+            foundInvisible = true;
 
-        if(tempBtn.getAttribute("isVisible") == "true"){
+        if(tempBtn.getAttribute("isVisible") == "true" && visibleCount == 16){
             stopGame();
             alert("You have lost.");
         }
@@ -122,24 +126,29 @@ function engine() {
             tempBtn.innerHTML = ''; // Clear any existing content
             let word = getWordAtIndex(typingTestParagraphs[selectedParagraph], PARAGRAPH_COUNTER)
 
-            // Create a span for each letter and add it to the container
-            word.split('').forEach(letter => {
-                const span = document.createElement('span');
-                span.textContent = letter;
-                span.classList.add('letter');
-                tempBtn.appendChild(span);
-            });
+            if(word){
+                // Create a span for each letter and add it to the container
+                word.split('').forEach(letter => {
+                    const span = document.createElement('span');
+                    span.textContent = letter;
+                    span.classList.add('letter');
+                    tempBtn.appendChild(span);
+                });
 
-            tempBtn.setAttribute("value", word);
-            tempBtn.setAttribute("isVisible", "true");
-            tempBtn.style.opacity = 1;
+                tempBtn.setAttribute("value", word);
+                tempBtn.setAttribute("isVisible", "true");
+                tempBtn.style.opacity = 1;
 
-            visibleCount++;
+                //visibleCount++;
 
-            PARAGRAPH_COUNTER++;
+                PARAGRAPH_COUNTER++;
+                console.log("selectedParagraph = " + WORDS.length + ", PARAGRAPH_COUNTER = " + PARAGRAPH_COUNTER);
+            }
         }
 
     }
+
+    updateVisibleCount();
 
     if(helperIsSelected && !helperHighlited){
         let btnId = "";
@@ -152,7 +161,7 @@ function engine() {
                     btnId = "btn" + i + "-" + j;
                     tempBtn = document.getElementById(btnId);
 
-                    if(tempBtn.getAttribute("value").toLowerCase() == WORDS[HELPER_COUNTER].toLowerCase()){
+                    if(HELPER_COUNTER < WORDS.length && tempBtn.getAttribute("value").toLowerCase() == WORDS[HELPER_COUNTER].toLowerCase()){
                         foundHelper = true;
                         helperHighlited = true;
                         tempBtn.classList.add("gameBtnHighlight");
@@ -168,6 +177,11 @@ function engine() {
        // }
     }
 
+    // Verify win condition
+   //console.log("visibleCount="+visibleCount);
+    if(!foundInvisible && visibleCount <= 0 && WORDS.length == PARAGRAPH_COUNTER)
+        winGame();
+
 }
 
 function startGame(){
@@ -178,9 +192,9 @@ function stopGame(){
     clearInterval(timerId);
 }
 
-// Generate a random integer between 0 and 3 (inclusive)
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function winGame(){
+    stopGame();
+    alert("You have won");
 }
 
 // Function to get the word at a specific index
@@ -189,7 +203,7 @@ function getWordAtIndex(paragraph, index) {
     const words = paragraph.split(/\s+/).filter(word => word.length > 0);
 
     // Access the word at the specified index
-    return WORDS[index] || 'Index out of range'; // Handle cases where index is out of bounds
+    return WORDS[index] || null; // Handle cases where index is out of bounds
 }
 
 function handleKeyDown(event) {
@@ -208,18 +222,17 @@ function handleKeyDown(event) {
                 const letters = document.querySelectorAll(querySelector);
 
                 // Loop through each letter and highlight if it matches the pressed key
-                for(let i = 0; i < letters.length; i++){
-                    if (letters[i].textContent.toLowerCase() === letter && i == 0){
-                        letters[i].classList.add('highlight');
+                for(let k = 0; k < letters.length; k++){
+                    if (letters[k].textContent.toLowerCase() === letter && k == 0){
+                        letters[k].classList.add('highlight');
                     }
-                    else if (i > 0 && letters[i].textContent.toLowerCase() === letter && letters[i-1].classList.contains('highlight'))
-                        letters[i].classList.add('highlight');
+                    else if (k > 0 && letters[k].textContent.toLowerCase() === letter && letters[k-1].classList.contains('highlight'))
+                        letters[k].classList.add('highlight');
                 }
 
                 const allHighlighted = Array.from(letters).every(span => span.classList.contains('highlight'));
-                console.log(allHighlighted);
 
-                if (letters.length > 0 && allHighlighted) {
+                if (letters.length > 0 && tempBtn.getAttribute("isVisible") == "true" && allHighlighted && visibleCount > 0) { // Condition to eliminate word block
                     console.log('All letters have been highlighted.');
 
                     let tempBtn = document.getElementById(btnId);
@@ -227,7 +240,8 @@ function handleKeyDown(event) {
                     tempBtn.setAttribute("isVisible", "false");
                     tempBtn.setAttribute("value", "");
                     tempBtn.style.opacity = 0;
-                    visibleCount--;
+                    //console.log("visibleCount-- on id: " + btnId);
+                    //visibleCount--;
                     if(tempBtn.classList.contains("gameBtnHighlight")){
                         tempBtn.classList.remove("gameBtnHighlight");
                         helperHighlited = false;
@@ -239,8 +253,26 @@ function handleKeyDown(event) {
     }
 }
 
+function updateVisibleCount(){
+    visibleCount = 0;
+    for(let i = 0; i < numberOfColumns; i++){
+        for(let j = 0; j < numberOfRows; j++){
+            let btnId = "btn" + i + "-" + j;
+            let tempBtn = document.getElementById(btnId);
+
+            if(tempBtn.getAttribute("isVisible") == "true")
+                visibleCount++;
+        }
+    }
+}
+
 function getRandomIntegerInclusive(max) {
     return Math.floor(Math.random() * (max + 1));
+}
+
+// Generate a random integer between 0 and 3 (inclusive)
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // Add event listener for 'keydown' events on the document
