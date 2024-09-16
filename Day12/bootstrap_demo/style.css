@@ -1,0 +1,7 @@
+.alert-success {
+
+    background-color: lightcoral;
+    border-color: coral;
+    opacity: 60%;
+    color: white;
+}
