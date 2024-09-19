@@ -5,22 +5,30 @@
         <title>Fork And Flame - Now Hiring</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <!-- CSS file -->
+        <link rel="stylesheet" href="style.css">
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     </head>
     <body>
-        <!-- Banner with Option buttons -->
-        <div style="background-color: #333; padding: 20px; display: flex; justify-content: center;">
-            <div style="margin-right: 30px; padding: 10px;">
-                <a href="index.html" style="color: white; font-family: Arial, sans-serif; font-size: 20px; text-decoration: none;">Home</a>
-            </div>
-            <div style="margin-right: 30px; padding: 10px;">
-                <a href="menu.html" style="color: white; font-family: Arial, sans-serif; font-size: 20px; text-decoration: none;">Menu</a>
-                </div>
-                <div style="padding: 10px; background-color: black; border-radius: 5px;">
-                <a href="hiring.html" style="color: white; font-family: Arial, sans-serif; font-size: 20px; text-decoration: none;">Now Hiring</a>
-            </div>
-        </div>
+        <!-- Navbar (loaded from navbar.html) -->
+        <div id="navbar-container"></div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              fetch('navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                  document.getElementById('navbar-container').innerHTML = data;
+                  document.getElementById('hiringItem').classList.add("menu-item-selected");
+                })
+                .catch(error => console.error('Error loading the navbar:', error));
+            });
+        </script>
         <!-- Background Image -->
         <div style=" position: relative; background-image: url('assets/hiring_background.jpg'); height: 100%;">
             <div style="position: absolute; top: 8%; left: 50%; transform: translate(-50%, -50%); color: white; font-family: Arial; font-size: 48px; text-align: center;">
