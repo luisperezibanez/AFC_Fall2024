@@ -1,0 +1,169 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Fork And Flame - Now Hiring</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    </head>
+    <body>
+        <!-- Banner with Option buttons -->
+        <div style="background-color: #333; padding: 20px; display: flex; justify-content: center;">
+            <div style="margin-right: 30px; padding: 10px;">
+                <a href="index.html" style="color: white; font-family: Arial, sans-serif; font-size: 20px; text-decoration: none;">Home</a>
+            </div>
+            <div style="margin-right: 30px; padding: 10px;">
+                <a href="menu.html" style="color: white; font-family: Arial, sans-serif; font-size: 20px; text-decoration: none;">Menu</a>
+                </div>
+                <div style="padding: 10px; background-color: black; border-radius: 5px;">
+                <a href="hiring.html" style="color: white; font-family: Arial, sans-serif; font-size: 20px; text-decoration: none;">Now Hiring</a>
+            </div>
+        </div>
+        <!-- Background Image -->
+        <div style=" position: relative; background-image: url('assets/hiring_background.jpg'); height: 100%;">
+            <div style="position: absolute; top: 8%; left: 50%; transform: translate(-50%, -50%); color: white; font-family: Arial; font-size: 48px; text-align: center;">
+                Join The Fork And Flame Family
+            </div>
+            <!-- Hiring Form -->
+            <div style="background-color: black; width: 290px; padding-top: 20px; padding-left: 30px;">
+                <form action="" method="get">
+                    <label style="color:white">First Name:
+                        <input placeholder="Your First Name" type="text" name="fname" id="fname" title="Enter your first name" required maxlength="20">
+                    </label>
+                    <br>
+                    <br>
+                    <label style="color:white">Last Name:
+                        <input placeholder="Your Last Name" type="text" name="lname" id="lname" title="Enter your last name" minlength="1" maxlength="20">
+                    </label>
+                    <br>
+                    <br>
+                    <label style="color:white">Address 1:
+                        <input placeholder="Street Address" type="text" name="address1" id="address1" title="Enter your Street Address" required>
+                    </label>
+                    <br>
+                    <br>
+                    <label style="color:white">Address 2:
+                        <input placeholder="Appt. Suite, other." type="text" name="address2" id="address2" title="Enter your Street Address">
+                    </label>
+                    <br>
+                    <br>
+                    <label style="color:white">City:
+                        <input placeholder="City" type="text" name="city" id="city" title="Enter your City" maxlength="29">
+                    </label>
+                    <br>
+                    <br>
+                    <label style="color:white">
+                        State:
+                        <select name="state" id="state" title="Select your state">
+                            <option value="" disabled selected>Select your state</option>
+                            <option value="AL">AL</option>
+                            <option value="AK">AK</option>
+                            <option value="AZ">AZ</option>
+                            <option value="AR">AR</option>
+                            <option value="CA">CA</option>
+                            <option value="CO">CO</option>
+                            <option value="CT">CT</option>
+                            <option value="DE">DE</option>
+                            <option value="FL">FL</option>
+                            <option value="GA">GA</option>
+                            <option value="HI">HI</option>
+                            <option value="ID">ID</option>
+                            <option value="IL">IL</option>
+                            <option value="IN">IN</option>
+                            <option value="IA">IA</option>
+                            <option value="KS">KS</option>
+                            <option value="KY">KY</option>
+                            <option value="LA">LA</option>
+                            <option value="ME">ME</option>
+                            <option value="MD">MD</option>
+                            <option value="MA">MA</option>
+                            <option value="MI">MI</option>
+                            <option value="MN">MN</option>
+                            <option value="MS">MS</option>
+                            <option value="MO">MO</option>
+                            <option value="MT">MT</option>
+                            <option value="NE">NE</option>
+                            <option value="NV">NV</option>
+                            <option value="NH">NH</option>
+                            <option value="NJ">NJ</option>
+                            <option value="NM">NM</option>
+                            <option value="NY">NY</option>
+                            <option value="NC">NC</option>
+                            <option value="ND">ND</option>
+                            <option value="OH">OH</option>
+                            <option value="OK">OK</option>
+                            <option value="OR">OR</option>
+                            <option value="PA">PA</option>
+                            <option value="RI">RI</option>
+                            <option value="SC">SC</option>
+                            <option value="SD">SD</option>
+                            <option value="TN">TN</option>
+                            <option value="TX">TX</option>
+                            <option value="UT">UT</option>
+                            <option value="VT">VT</option>
+                            <option value="VA">VA</option>
+                            <option value="WA">WA</option>
+                            <option value="WV">WV</option>
+                            <option value="WI">WI</option>
+                            <option value="WY">WY</option>
+                        </select>
+                    </label>
+                    <br>
+                    <br>
+                    <label style="color:white">Age:
+                        <input placeholder="21" type="number" name="age" id="age" min="21" max="99" title="Enter your Age. Min. 21, Max 99.">
+                    </label>
+                    <br>
+                    <br>
+                    <label style="color:white">Phone Number:
+                        <input placeholder="(123)456-7890" type="text" name="cel" id="cel" title="Enter your cellphone number" required pattern="^\(\d{3}\)\d{3}-\d{4}$">
+                    </label>
+                    <br>
+                    <br>
+                    <label style="color:white">Email:
+                        <input placeholder="your@email.com" type="email" name="emailAddress" id="email_input" title="Enter your email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gov|mil|us)$">
+                    </label>
+                    <br>
+                    <br>
+                    <label style="color:white">Password:</label>
+                    <input type="password" name="pw" id="pass_input" title="Password must be 8-12 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character."
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$">
+                    <br>
+                    <br>
+                    <label style="color:white">Married:
+                        <input type="radio" name="isMarried" id="isMarried1" value="true">Yes
+                        <input type="radio" name="isMarried" id="isMarried2" value="false" checked>No
+                    </label>
+                    <br>
+                    <br>
+                    <label style="color:white">
+                        Favorite Color:
+                        <br>
+                        <input type="checkbox" name="favoriteColor" id="favoriteColor1" value="red">Red
+                        <br>
+                        <input type="checkbox" name="favoriteColor" id="favoriteColor2" value="white">White
+                        <br>
+                        <input type="checkbox" name="favoriteColor" id="favoriteColor3" value="blue">Blue
+                        <br>
+                        <input type="checkbox" name="favoriteColor" id="favoriteColor4" value="green">Green
+                        <br>
+                        <input type="checkbox" name="favoriteColor" id="favoriteColor5" value="silver">Silver
+                    </label>
+                    <br>
+                    <br>
+                    <Label style="color:white">
+                        More Info:
+                        <br>
+                        <textarea name="moreInfo" id="moreInfo" cols="31" rows="4" maxlength="30"></textarea>
+                    </Label>
+                    <br>
+                    <br>
+                    <button type="submit">Submit</button>
+                    <button type="reset">Reset</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
