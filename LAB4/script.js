@@ -7,11 +7,11 @@ const STATES = [
 ];
   
 const MENU_ITEMS = [
-    { name: "Blazing Ribeye", description: "Grilled to perfection with a fiery twist.", price: "$25.99", image: "https://via.placeholder.com/100" },
-    { name: "Flame-Kissed Salmon", description: "Seared with herbs and a citrus glaze.", price: "$22.50", image: "https://via.placeholder.com/100" },
-    { name: "Inferno Pasta", description: "Spicy marinara with roasted veggies and a kick of chili.", price: "$18.99", image: "https://via.placeholder.com/100" },
-    { name: "Torch-Grilled Chicken", description: "Smoky grilled chicken with a charred finish.", price: "$19.99", image: "https://via.placeholder.com/100" },
-    { name: "Ember-Roasted Veggie Skewers", description: "Seasonal veggies roasted over open flames.", price: "$14.99", image: "https://via.placeholder.com/100" },
+    { name: "Blazing Ribeye", description: "Grilled to perfection with a fiery twist.", price: "$25.99", image: "https://t3.ftcdn.net/jpg/02/21/80/66/360_F_221806641_uJyHA8J1qbSCth5RwBOFcifoOMwuUkZF.jpg" },
+    { name: "Flame-Kissed Salmon", description: "Seared with herbs and a citrus glaze.", price: "$22.50", image: "https://data.thefeedfeed.com/static/2019/12/23/15770785955e004f43957dd.jpg" },
+    { name: "Inferno Pasta", description: "Spicy marinara with roasted veggies and a kick of chili.", price: "$18.99", image: "https://media-cdn.tripadvisor.com/media/photo-s/0e/c6/f4/6a/the-flying-pasta-inferno.jpg" },
+    { name: "Torch-Grilled Chicken", description: "Smoky grilled chicken with a charred finish.", price: "$19.99", image: "https://www.budgetbytes.com/wp-content/uploads/2024/06/Grilled-Chicken-Overhead.jpg" },
+    { name: "Ember-Roasted Veggie Skewers", description: "Seasonal veggies roasted over open flames.", price: "$14.99", image: "https://www.lastingredient.com/wp-content/uploads/2019/08/grilled-bbq-tofu-veggie-skewers3.jpg" },
 ];
 
 function fetchStates(){
