@@ -155,19 +155,4 @@ function updateButtons() {
     document.getElementById("nextButton").disabled = currentIndex === MENU_ITEMS.length - 1;
 }
 
-document.getElementById("prevButton").addEventListener("click", () => {
-    if (currentIndex > 0) {
-        currentIndex--;
-        renderMenuItem(currentIndex);
-        updateButtons();
-    }
-});
-
-document.getElementById("nextButton").addEventListener("click", () => {
-    if (currentIndex < MENU_ITEMS.length - 1) {
-        currentIndex++;
-        renderMenuItem(currentIndex);
-        updateButtons();
-    }
-});
 

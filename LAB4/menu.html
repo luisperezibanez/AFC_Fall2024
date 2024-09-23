@@ -29,6 +29,23 @@
                   document.getElementById('menuItem').classList.add("navbar-item-selected");
                   renderMenuItem(currentIndex);
                   updateButtons();
+
+                  document.getElementById("prevButton").addEventListener("click", () => {
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                            renderMenuItem(currentIndex);
+                            updateButtons();
+                        }
+                    });
+
+                    document.getElementById("nextButton").addEventListener("click", () => {
+                        if (currentIndex < MENU_ITEMS.length - 1) {
+                            currentIndex++;
+                            renderMenuItem(currentIndex);
+                            updateButtons();
+                        }
+                    });
+
                 })
                 .catch(error => console.error('Error loading the navbar:', error));
             });
