@@ -6,6 +6,13 @@ const STATES = [
     'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
 ];
   
+const MENU_ITEMS = [
+    { name: "Blazing Ribeye", description: "Grilled to perfection with a fiery twist.", price: "$25.99", image: "https://via.placeholder.com/100" },
+    { name: "Flame-Kissed Salmon", description: "Seared with herbs and a citrus glaze.", price: "$22.50", image: "https://via.placeholder.com/100" },
+    { name: "Inferno Pasta", description: "Spicy marinara with roasted veggies and a kick of chili.", price: "$18.99", image: "https://via.placeholder.com/100" },
+    { name: "Torch-Grilled Chicken", description: "Smoky grilled chicken with a charred finish.", price: "$19.99", image: "https://via.placeholder.com/100" },
+    { name: "Ember-Roasted Veggie Skewers", description: "Seasonal veggies roasted over open flames.", price: "$14.99", image: "https://via.placeholder.com/100" },
+];
 
 function fetchStates(){
     const selectState = document.getElementById("state");
@@ -122,3 +129,45 @@ function validateAndSubmitForm() {
         alert('Errors:\n' + errorMessages.join('\n'));
     }
 }
+
+let currentIndex = 0;
+
+function renderMenuItem(index) {
+    const menuContainer = document.getElementById("menuContainer");
+    menuContainer.innerHTML = ""; // Clear previous item
+
+    const item = MENU_ITEMS[index];
+    const menuItemDiv = document.createElement("div");
+    menuItemDiv.className = "menu-item transparent-bg";
+    menuItemDiv.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" class="img-fluid">
+        <div class="menu-content">
+            <h5>${item.name}</h5>
+            <p>${item.description}</p>
+            <p><strong>Price: ${item.price}</strong></p>
+        </div>
+    `;
+    menuContainer.appendChild(menuItemDiv);
+}
+
+function updateButtons() {
+    document.getElementById("prevButton").disabled = currentIndex === 0;
+    document.getElementById("nextButton").disabled = currentIndex === MENU_ITEMS.length - 1;
+}
+
+document.getElementById("prevButton").addEventListener("click", () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        renderMenuItem(currentIndex);
+        updateButtons();
+    }
+});
+
+document.getElementById("nextButton").addEventListener("click", () => {
+    if (currentIndex < MENU_ITEMS.length - 1) {
+        currentIndex++;
+        renderMenuItem(currentIndex);
+        updateButtons();
+    }
+});
+

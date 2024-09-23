@@ -14,8 +14,10 @@
         <!-- CSS file -->
         <link rel="stylesheet" href="style.css">
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+        <!-- script file -->
+        <script src="script.js" async></script>
     </head>
-    <body>
+    <body style="background-image: url('assets/menu_background.jpg');">
         <!-- Navbar (loaded from navbar.html) -->
         <div id="navbar-container"></div>
         <script>
@@ -24,52 +26,27 @@
                 .then(response => response.text())
                 .then(data => {
                   document.getElementById('navbar-container').innerHTML = data;
-                  document.getElementById('menuItem').classList.add("menu-item-selected");
+                  document.getElementById('menuItem').classList.add("navbar-item-selected");
+                  renderMenuItem(currentIndex);
+                  updateButtons();
                 })
                 .catch(error => console.error('Error loading the navbar:', error));
             });
         </script>
-        <!-- Background Image -->
-        <div style=" position: relative; background-image: url('assets/menu_background.jpg'); height: 100%;">
+        <div>
             <!-- Menu Table -->
-            <div style="padding: 50px;">
-                <table border="1" cellpadding="10" cellspacing="0" style="width: 40%; text-align: left; font-family: Arial, sans-serif;">
-                    <thead>
-                    <tr>
-                        <th style="background-color: #f2f2f2;">Name</th>
-                        <th style="background-color: #f2f2f2;">Description</th>
-                        <th style="background-color: #f2f2f2;">Price</th>
-                    </tr>
-                    </thead>
-                    <tbody style="font-family: Arial; font-weight: bold; color: white; background-color: black;">
-                    <tr>
-                        <td>Blazing Ribeye</td>
-                        <td>Grilled to perfection with a fiery twist.</td>
-                        <td>$25.99</td>
-                    </tr>
-                    <tr>
-                        <td>Flame-Kissed Salmon</td>
-                        <td>Seared with herbs and a citrus glaze.</td>
-                        <td>$22.50</td>
-                    </tr>
-                    <tr>
-                        <td>Inferno Pasta</td>
-                        <td>Spicy marinara with roasted veggies and a kick of chili.</td>
-                        <td>$18.99</td>
-                    </tr>
-                    <tr>
-                        <td>Torch-Grilled Chicken</td>
-                        <td>Smoky grilled chicken with a charred finish.</td>
-                        <td>$19.99</td>
-                    </tr>
-                    <tr>
-                        <td>Ember-Roasted Veggie Skewers</td>
-                        <td>Seasonal veggies roasted over open flames.</td>
-                        <td>$14.99</td>
-                    </tr>
-                    </tbody>
-                </table>
-              </div>
+            <div class="container">
+                <!-- Menu Label -->
+                 <div class="row roboto-regular">
+                    <div id="menuLabel" class="d-flex justify-content-center col-md-12">Explore our Menu</div>
+                </div>
+                <div class="menu-container" id="menuContainer"></div>
+            
+                <div class="menu-buttons">
+                    <button class="btn btn-secondary" id="prevButton">Previous</button>
+                    <button class="btn btn-primary" id="nextButton">Next</button>
+                </div>
+            </div>
         </div>
     </body>
 </html>

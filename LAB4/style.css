@@ -39,6 +39,10 @@ body {
     color: white; 
     font-size: 48px;
 }
+#menuLabel{
+    color: white; 
+    font-size: 48px; 
+}
 #menuBtnContainer {
     position: absolute;
     top: 55%;
@@ -52,3 +56,40 @@ body {
     max-width: 30%; /* 80% width */
     margin: auto; /* Center the container */
 } 
+.menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+    color: white;
+}
+.menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.menu-item img {
+    width: 250px; 
+    height: 250px;
+    object-fit: cover; 
+    margin-right: 20px;
+}
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    width: 100%; /* Ensure it takes up available width */
+    height: 150px; /* Match height to image */
+}
+.menu-buttons {
+    text-align: center;
+    margin-top: 30px;
+}
