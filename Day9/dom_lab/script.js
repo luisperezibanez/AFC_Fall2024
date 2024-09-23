@@ -10,7 +10,6 @@ let fruits = document.querySelectorAll("h1");
 
 food.style.color = "blue";
 
-
 let sampleInput = document.getElementById("sampleInput");
 sampleInput.setAttribute("type", "password");
 
@@ -21,6 +20,20 @@ function initializeGame(){
 
     // Shuffle the array
     const shuffledNumbers = shuffleArray(numbers);
+
+    // Define the size of each cell and the total grid size
+    const cellSize = 75;
+    const gridSize = 4;
+
+    const imagePath = 'assets/img1.jpg';
+    const rowPositions = [];
+    const colPositions = [];
+
+    // Populate the row and column positions
+    for (let i = 0; i < gridSize; i++) {
+        rowPositions.push(-i * cellSize + 'px');
+        colPositions.push(-i * cellSize + 'px');
+    }
 
     let numberIndex = 0;
     for(let i = 0; i < numberOfColumns; i++){
@@ -33,6 +46,14 @@ function initializeGame(){
                 tempBtn.addEventListener("click", (e) => {
                     moveBtn(tempBtn);
                 });
+
+                // Calculate background position
+                const backgroundPosition = `${colPositions[i]} ${rowPositions[j]}`;
+                
+                // Set the background position as a style
+                //tempBtn.style.backgroundImage = `url('${imagePath}')`;
+                tempBtn.style.backgroundPosition = backgroundPosition;
+
             }
             numberIndex++;
         }

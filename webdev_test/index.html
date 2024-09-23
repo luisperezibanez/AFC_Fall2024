@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age Test</title>
+    <style></style>
+  </head>
+  <body>
+    <h1>Age Verifyer 2000</h1>
+    <form action="" method="GET">
+      <label for="age">
+        <input id="age" type="text" placeholder="min. 19" required />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+    <script>
+      const form = document.getElementsByTagName("form")[0];
+      const numberInput = document.getElementsByTagName("input")[0];
+      const minAge = 18;
+
+      let submitForm = (event) => {
+        const inputValue = numberInput.value.trim();
+        // Check if the input is numeric and meets the minimum length
+        if (!isNumeric(inputValue)) {
+          event.preventDefault(); // Prevent form submission
+          alert(`Error: Input must be a numeric value.`);
+        } else if (inputValue <= minAge) {
+          event.preventDefault(); // Prevent form submission
+          alert("you are not older than 18 years of age.");
+        } else alert("you are over 18 years of age.");
+      };
+
+      function isNumeric(value) {
+        return !isNaN(value) && !isNaN(parseFloat(value));
+      }
+
+      form.addEventListener("submit", submitForm);
+    </script>
+  </body>
+</html>

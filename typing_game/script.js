@@ -20,18 +20,30 @@ let SELECTED_SPEED = 100; // How many times 'timeInterval' has to pass to show a
 let helperIsSelected = true;
 let helperHighlited = false;
 
-const numberOfColumns = 4;
-const numberOfRows = 4;
+const numberOfColumns = 8;
+const numberOfRows = 5;
 let visibleCount = 0;
 
 function setup() {
     let setupCounter = 0;
+
     for(let i = 0; i < numberOfColumns; i++){
         for(let j = 0; j < numberOfRows; j++){
             let btnId = "btn" + i + "-" + j;
-            let tempBtn = document.getElementById(btnId);
+            //let tempBtn = document.getElementById(btnId);
+            let tempBtn = document.createElement("div");
+            tempBtn.classList.add("gameBtn2");
+            tempBtn.classList.add("fade-in");
+            tempBtn.classList.add("visible");
+            tempBtn.setAttribute("id", btnId);
+            tempBtn.setAttribute("isVisible", "false");
 
-            let word = getWordAtIndex(typingTestParagraphs[selectedParagraph], setupCounter++)
+            
+
+            let puzzleContainer = document.getElementById("puzzleContainer");
+            puzzleContainer.appendChild(tempBtn);
+
+            let word = getWordAtIndex(typingTestParagraphs[selectedParagraph], setupCounter++);
 
             if(word){
                 // Create a span for each letter and add it to the container
@@ -42,10 +54,15 @@ function setup() {
                     tempBtn.appendChild(span);
                 });
 
-
+                visibleCount++;
+                tempBtn.setAttribute("isVisible", "true");
                 tempBtn.setAttribute("value", word);
             }
+            
         }
+        console.log("visibleCount =  "+ visibleCount);
+        if(visibleCount >= typingTestParagraphs[selectedParagraph].length - 1)
+            break;
     }
 }
 
@@ -62,9 +79,10 @@ function initializeGame(){
     if(selectedParagraph == 0)
         selectedParagraph++;
 
+    //selectedParagraph = 0;
     WORDS = typingTestParagraphs[selectedParagraph].split(" ");
 
-    helperIsSelected = true;
+    helperIsSelected = false;
     helperHighlited = false;
 
     visibleCount = 0;
@@ -78,9 +96,13 @@ function initializeGame(){
             tempBtn.setAttribute("isVisible", "false");
             tempBtn.setAttribute("isBlocked", "false");
             tempBtn.classList.remove("gameBtnHighlight");
+            tempBtn.classList.remove("fade-in");
+            tempBtn.classList.remove("visible");
             tempBtn.style.opacity = 0;
+            tempBtn.classList.add("fade-in");
         }
     }
+    document.getElementById("startBtn").blur();
     startGame();
 }
 
@@ -89,17 +111,17 @@ function engine() {
     let foundInvisible = false;
     if(VISIBLE_SPEED >= SELECTED_SPEED){
         VISIBLE_SPEED = 0;
-        //visibleCount = 0;
+
         // Usage
-        const randomColumn = getRandomInt(0, 3);
-        const randomRow = getRandomInt(0, 3);
+        const randomColumn = getRandomInt(0, numberOfColumns-1);
+        const randomRow = getRandomInt(0, numberOfRows-1);
 
         let btnId = "btn" + randomColumn + "-" + randomRow;
         let tempBtn = document.getElementById(btnId);
 
         if(tempBtn.getAttribute("isVisible") == "true") {
-            for(let i = 0; i < 4; i++){
-                for(let j = 0; j < 4; j++){
+            for(let i = 0; i < numberOfColumns; i++){
+                for(let j = 0; j < numberOfRows; j++){
                     btnId = "btn" + i + "-" + j;
                     tempBtn = document.getElementById(btnId);
 
@@ -107,8 +129,6 @@ function engine() {
                         foundInvisible = true;
                         break;
                     }
-                    //else
-                        //visibleCount++;
                 }
                 if(foundInvisible)
                     break;
@@ -117,7 +137,7 @@ function engine() {
         else
             foundInvisible = true;
 
-        if(tempBtn.getAttribute("isVisible") == "true" && visibleCount == 16){
+        if(tempBtn.getAttribute("isVisible") == "true" && visibleCount == (numberOfColumns * numberOfRows)){
             stopGame();
             alert("You have lost.");
         }
@@ -138,8 +158,8 @@ function engine() {
                 tempBtn.setAttribute("value", word);
                 tempBtn.setAttribute("isVisible", "true");
                 tempBtn.style.opacity = 1;
-
-                //visibleCount++;
+                tempBtn.classList.add("visible");
+                
 
                 PARAGRAPH_COUNTER++;
                 console.log("selectedParagraph = " + WORDS.length + ", PARAGRAPH_COUNTER = " + PARAGRAPH_COUNTER);
@@ -155,30 +175,27 @@ function engine() {
         let tempBtn = null;
         let foundHelper = false;
         
-        //while(!foundHelper){
-            for(let i = 0; i < numberOfColumns; i++){
-                for(let j = 0; j < numberOfRows; j++){
-                    btnId = "btn" + i + "-" + j;
-                    tempBtn = document.getElementById(btnId);
+        for(let i = 0; i < numberOfColumns; i++){
+            for(let j = 0; j < numberOfRows; j++){
+                btnId = "btn" + i + "-" + j;
+                tempBtn = document.getElementById(btnId);
 
-                    if(HELPER_COUNTER < WORDS.length && tempBtn.getAttribute("value").toLowerCase() == WORDS[HELPER_COUNTER].toLowerCase()){
-                        foundHelper = true;
-                        helperHighlited = true;
-                        tempBtn.classList.add("gameBtnHighlight");
-                        HELPER_COUNTER++;
-                        break;
-                    }
-                }
-                if(foundHelper)
+                if(HELPER_COUNTER < WORDS.length && tempBtn.getAttribute("value").toLowerCase() == WORDS[HELPER_COUNTER].toLowerCase()){
+                    foundHelper = true;
+                    helperHighlited = true;
+                    tempBtn.classList.add("gameBtnHighlight");
+                    HELPER_COUNTER++;
                     break;
+                }
             }
-            if( visibleCount > 0 && !foundHelper)
-                HELPER_COUNTER++;
-       // }
+            if(foundHelper)
+                break;
+        }
+        if( visibleCount > 0 && !foundHelper)
+            HELPER_COUNTER++;
     }
 
     // Verify win condition
-   //console.log("visibleCount="+visibleCount);
     if(!foundInvisible && visibleCount <= 0 && WORDS.length == PARAGRAPH_COUNTER)
         winGame();
 
@@ -209,15 +226,17 @@ function getWordAtIndex(paragraph, index) {
 function handleKeyDown(event) {
     // `event` contains information about the keyboard event
     console.log('Key pressed:', event.keyCode); // Logs the key pressed
+    console.log(visibleCount);
 
     if(event.keyCode != 32){
         let btnId = "";
 
-        for(let i = 0; i < 4; i++){
-            for(let j = 0; j < 4; j++){
+        for(let i = 0; i < numberOfColumns; i++){
+            for(let j = 0; j < numberOfRows; j++){
                 btnId = "btn" + i + "-" + j;
                 let querySelector = "#"+btnId + " .letter";
 
+                let tempBtn = document.getElementById(btnId);
                 const letter = event.key.toLowerCase(); // Convert to lowercase for comparison
                 const letters = document.querySelectorAll(querySelector);
 
@@ -235,18 +254,16 @@ function handleKeyDown(event) {
                 if (letters.length > 0 && tempBtn.getAttribute("isVisible") == "true" && allHighlighted && visibleCount > 0) { // Condition to eliminate word block
                     console.log('All letters have been highlighted.');
 
-                    let tempBtn = document.getElementById(btnId);
                     tempBtn.innerHTML = ''; // Clear any existing content
                     tempBtn.setAttribute("isVisible", "false");
                     tempBtn.setAttribute("value", "");
+                    tempBtn.classList.remove("visible");
                     tempBtn.style.opacity = 0;
-                    //console.log("visibleCount-- on id: " + btnId);
-                    //visibleCount--;
+
                     if(tempBtn.classList.contains("gameBtnHighlight")){
                         tempBtn.classList.remove("gameBtnHighlight");
                         helperHighlited = false;
                     }
-                
                 }
             }
         }

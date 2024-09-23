@@ -1,23 +1,20 @@
 body {
     padding: 0px;
+    background-color: black;
 }
 #gameContainer {
     display: flex;
     justify-content: center;
     width: 100%;
-    border-style: solid;
-    border-width: 10px;
-    border-color: black;
+    background-image: url("assets/img1.jpg");
 }
 #puzzleContainer {
-    border-style: solid;
-    border-width: 2px;
-    border-color: blue;
-    width: 600px;
-    height: 600px;
+    margin-top: 100px;
+    width: 95%;
+    height: 700px;
     padding: 5px;
     display:grid;
-    grid-template-columns: repeat(4, 25%);
+    grid-template-columns: repeat(8, 12%);
 }
 .gameBtn {
     align-content: center;
@@ -30,14 +27,32 @@ body {
     border-radius: 10px;
     border-color: black;
 }
+.gameBtn2 {
+    align-content: center;
+    height: 70px;
+    padding: 0px;
+    font-size: 26px;
+    font-family: Arial;
+    text-align: center;
+}
 .gameBtnHighlight {
+    border-style: solid;
     border-width: 5px;
     border-color: red;
+    border-radius: 35px;
+}
+.letter {
+    color: white;
 }
 .highlight {
     color: red;
     font-weight: bold;
 }
-.letter {
-
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* Duration and easing function */
+}
+  
+.fade-in.visible {
+    opacity: 1;
 }
