@@ -16,25 +16,26 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
         <!-- Fontawesome -->
         <script src="https://kit.fontawesome.com/25d9595b5e.js" crossorigin="anonymous"></script>
+        <!-- script file -->
+        <script src="script.js" async></script>
     </head>
     <body style="background-image: url('assets/background.jpg');">
         <!-- Navbar (loaded from navbar.html) -->
         <div id="navbar-container"></div>
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-              fetch('navbar.html')
+                fetch('navbar.html')
                 .then(response => response.text())
                 .then(data => {
-                  document.getElementById('navbar-container').innerHTML = data;
-                  document.getElementById('homeItem').classList.add("menu-item-selected");
+                    document.getElementById('navbar-container').innerHTML = data;
+                    document.getElementById('homeItem').classList.add("navbar-item-selected");
                 })
                 .catch(error => console.error('Error loading the navbar:', error));
             });
         </script>
-          <!-- Background Image -->
         <div>
           <!-- Welcome Label -->
-            <div id="welcomeLabel" class="roboto-regular">
+            <div id="welcomeLabel" class="roboto-regular message-banner">
                 Welcome to The Fork And Flame
             </div>
             <!-- Additional Menu button for flare -->

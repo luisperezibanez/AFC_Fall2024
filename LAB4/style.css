@@ -1,4 +1,8 @@
-.menu-item-selected {
+body {
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.navbar-item-selected {
     border-style: solid;
     border-color: white;
     border-width: 2px;
@@ -14,17 +18,24 @@
     font-weight: 500;
     font-style: normal;
   }
+/* fontaweson */
 .fork-icon {
     color: black;
     font-size: 19px;
     margin-right: 12px;
     margin-left: 12px;
 }
-#welcomeLabel {
+.message-banner {
     position: absolute; 
+    transform: translate(-50%, -50%); 
+    color: white; 
+    font-size: 48px;
+}
+#welcomeLabel {
     top: 20%; 
     left: 50%; 
-    transform: translate(-50%, -50%); 
+}
+#hiringLabel {
     color: white; 
     font-size: 48px;
 }
@@ -34,3 +45,10 @@
     left: 50%; 
     transform: translate(-50%, -50%);
 }
+.transparent-bg {
+    background-color: rgba(0, 0, 0, 0.6); /* 60% transparent black */
+}
+.form-container {
+    max-width: 30%; /* 80% width */
+    margin: auto; /* Center the container */
+} 

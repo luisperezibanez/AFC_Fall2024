@@ -1,0 +1,85 @@
+<!-- Hiring Form -->
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div>
+            <div class="transparent-bg p-4 rounded">
+                <form id="hiringForm" action="" method="get" style="color:white">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="fname">First Name:</label>
+                            <input type="text" class="form-control" id="fname" name="fname" placeholder="Your First Name" title="Enter your first name">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="lname">Last Name:</label>
+                            <input type="text" class="form-control" id="lname" name="lname" placeholder="Your Last Name" title="Enter your last name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address1">Address 1:</label>
+                        <input type="text" class="form-control" id="address1" name="address1" placeholder="Street Address" title="Enter your Street Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="address2">Address 2:</label>
+                        <input type="text" class="form-control" id="address2" name="address2" placeholder="Appt. Suite, other." title="Enter your Street Address">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 form-group">
+                            <label for="city">City:</label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="City" maxlength="29" title="Enter your City">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label for="state">State:</label>
+                            <select class="form-control" id="state" name="state" title="Select your state">
+                                <option value="" disabled selected>Select state</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="city">Zip code:</label>
+                            <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Zip code" title="Enter your City">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 form-group">
+                            <label for="age">Age:</label>
+                            <input type="number" class="form-control" id="age" name="age" placeholder="min. 21" title="Enter your Age. Min. 21, Max 99.">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="cel">Phone Number:</label>
+                            <input type="text" class="form-control" id="cel" name="cel" placeholder="(123)456-7890" title="Enter your cellphone number">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="email_input">Email:</label>
+                            <input type="email" class="form-control" id="email_input" name="emailAddress" placeholder="your@email.com" title="Enter your email">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="pass_input">Password:</label>
+                            <input type="password" class="form-control" id="pass_input" name="pw" title="Password must be 8-12 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Married:</label><br>
+                        <input type="radio" name="isMarried" id="isMarried1" value="true"> Yes
+                        <input type="radio" name="isMarried" id="isMarried2" value="false" checked> No
+                    </div>
+                    <div class="form-group">
+                        <label>Favorite Color:</label><br>
+                        <input type="checkbox" name="favoriteColor" id="favoriteColor1" value="red"> Red<br>
+                        <input type="checkbox" name="favoriteColor" id="favoriteColor2" value="white"> White<br>
+                        <input type="checkbox" name="favoriteColor" id="favoriteColor3" value="blue"> Blue<br>
+                        <input type="checkbox" name="favoriteColor" id="favoriteColor4" value="green"> Green<br>
+                        <input type="checkbox" name="favoriteColor" id="favoriteColor5" value="silver"> Silver
+                    </div>
+                    <div class="form-group">
+                        <label for="moreInfo">More Info:</label>
+                        <textarea class="form-control" id="moreInfo" name="moreInfo" cols="31" rows="4" maxlength="30"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
