@@ -2,9 +2,15 @@ import { useState } from 'react';
 import Greeting from './components/Greeting.jsx';
 import UserCard from './components/UserCard.jsx';
 import CardContainer from './components/CardContainer.jsx';
+import { sortArrayByAge } from './helper.js';
 
 function App() {
-  
+  let users = [{name:"Bob", age:30}, {name:"Charlie", age:35}, {name:"Alice", age:25}];
+ 
+  let userCards = sortArrayByAge(users).map(user => {
+    let {name, age} = user;
+    return <UserCard key={name+age} name={name} age={age}/>
+  });
 
   return (
     <>
@@ -12,9 +18,7 @@ function App() {
       <Greeting name="Luis"/>
     </div>
     <CardContainer>
-      <UserCard name="Bob" age="30"/>
-      <UserCard name="Charlie" age="35"/>
-      <UserCard name="Alice" age="25"/>
+      {userCards}
     </CardContainer>
     </>
   );
