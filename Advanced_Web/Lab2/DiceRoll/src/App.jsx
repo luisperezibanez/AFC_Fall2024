@@ -3,6 +3,14 @@ import './App.css'
 import Dice from './components/Dice'
 import { randomDice } from './helper.js'
 
+/*
+  Order os set states is as follows:
+  User clicks Roll
+  Roll trigers setDiceNumbers -> generates all random numbers
+  useEffect of diceNumbers trigers updateDice -> maps Dice to diceNumbers
+  useEffect of diceElements trigers setSum
+*/
+
 function App() {
 
   let [diceNumbers, setDiceNumbers] = useState([1]); // An array of numbers that range from 1 to 6
