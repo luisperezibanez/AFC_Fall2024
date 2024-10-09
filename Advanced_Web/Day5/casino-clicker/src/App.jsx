@@ -8,7 +8,6 @@ function App() {
   const [isSeven, setIsSeven] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Effect to track changes to numberLabel
   useEffect(() => {
     if (number === 7) {
       setIsSeven(true);
@@ -16,8 +15,8 @@ function App() {
     } else {
       setIsSeven(false);
     }
-  }, [number]); // Dependency array includes numberLabel
-
+  }, [number]);
+  
   return (
     <>
       <h1>Welcome to a Random Casino Game</h1>
