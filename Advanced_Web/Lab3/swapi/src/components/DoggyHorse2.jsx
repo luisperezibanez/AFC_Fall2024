@@ -47,8 +47,8 @@ const MovieRow = ({film}) => {
   console.log("film: " +film)
   const initMovie = {
     episode_id: 0,
-    title: "",
-    release_date: ""
+    title: "Loading...",
+    release_date: "Loading..."
   }
 
   const [movie, setMovie] = useState(initMovie);
