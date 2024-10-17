@@ -58,8 +58,6 @@ function App() {
               <Route path="/about" element={<About/>}/>
               <Route path="/contact" element={<Contact/>}/>
             </Routes>
-            <Button variant="contained" onClick={handleClick}>Now Playing</Button>
-            {movieCards}
           </div>
         </div>
       </Router>
